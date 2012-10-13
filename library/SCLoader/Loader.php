@@ -22,9 +22,9 @@ class Loader implements ILoader
     /**
      * Basic directory
      *
-     * @var string
+     * @var null
      */
-    private $baseDir;
+    private $baseDir = null;
 
     /**
      * Class prefix
@@ -38,7 +38,7 @@ class Loader implements ILoader
      */
     public function __construct()
     {
-        if (!$this->baseDir) {
+        if (null == $this->baseDir) {
             $this->baseDir = __DIR__ . '/../../';
         }
     }
@@ -118,7 +118,6 @@ class Loader implements ILoader
             throw new \ClassNotFoundException($class);
         }
     }
-
     /**
      * @param $className
      * @param $namespace
