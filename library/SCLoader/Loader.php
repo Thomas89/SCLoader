@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @namespace
+ */
 namespace SCLoader;
 
 use SCLoader\ILoader;
@@ -9,10 +12,30 @@ require_once 'ClassNotFoundException.php';
 
 class Loader implements ILoader
 {
-    protected $namespaces = array();
+    /**
+     * Array of namespaces
+     *
+     * @var array
+     */
+    private $namespaces = array();
 
-    protected $baseDir;
+    /**
+     * Basic directory
+     *
+     * @var string
+     */
+    private $baseDir;
 
+    /**
+     * Class prefix
+     *
+     * @var null
+     */
+    private $prefix = null;
+
+    /**
+     * Constructor sets the basic directory
+     */
     public function __construct()
     {
         if (!$this->baseDir) {
@@ -109,7 +132,8 @@ class Loader implements ILoader
             $dir = $this->baseDir;
         }
 
-        return $dir . DIRECTORY_SEPARATOR . $namespace . DIRECTORY_SEPARATOR . $className . '.php';
+        return $dir . DIRECTORY_SEPARATOR . $namespace . DIRECTORY_SEPARATOR . $className
+            . (($this->prefix != null) ? '.' . $this->prefix : null) . '.php';
     }
 
     /**
@@ -129,5 +153,28 @@ class Loader implements ILoader
     public function getBaseDir()
     {
         return $this->baseDir;
+    }
+
+    /**
+     * @param $prefix
+     *
+     * @return mixed|Loader
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    /**
+     * @return bool|mixed|null
+     */
+    public function getPrefix()
+    {
+        if (null !== $this->prefix) {
+            return $this->prefix;
+        }
+
+        return false;
     }
 }

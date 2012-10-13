@@ -1,5 +1,8 @@
 #Description
-SCLoader is a simple classloader for the namespace.
+SCLoader is a simple classloader for namespaces.
+
+Requires PHP 5.3
+
 ##Usage
     <?php
         
@@ -40,3 +43,9 @@ Sets the base directory for the classloader.
  
 ##getBaseDir()
 Get the base path.
+
+##setPrefix()
+Set prefix.
+
+##getPrefix()
+Get prefix.

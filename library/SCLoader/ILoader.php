@@ -40,4 +40,16 @@ interface ILoader
      * @return mixed
      */
     public function getBaseDir();
+
+    /**
+     * @param $prefix
+     *
+     * @return mixed
+     */
+    public function setPrefix($prefix);
+
+    /**
+     * @return mixed
+     */
+    public function getPrefix();
 }
