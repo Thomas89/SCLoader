@@ -1,0 +1,133 @@
+<?php
+
+namespace SCLoader;
+
+use SCLoader\ILoader;
+
+require_once 'ILoader.php';
+require_once 'ClassNotFoundException.php';
+
+class Loader implements ILoader
+{
+    protected $namespaces;
+
+    protected $baseDir;
+
+    public function __construct()
+    {
+        if (!$this->baseDir) {
+            $this->baseDir = __DIR__ . '/../../';
+        }
+    }
+
+    /**
+     * @param $namespace
+     * @param $path
+     *
+     * @return Loader
+     */
+    public function registerNamespace($namespace, $path)
+    {
+        $this->namespaces[$namespace] = (array) $path;
+        return $this;
+    }
+
+    /**
+     * @param $array
+     *
+     * @return mixed|Loader
+     */
+    public function registerNamespaces($array)
+    {
+        $this->namespaces = array_merge($this->namespaces, $array);
+        return $this;
+    }
+
+    /**
+     * @return mixed|Loader
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'loader'), true, false);
+        return $this;
+    }
+
+    /**
+     * @return mixed|Loader
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister(array($this, 'loader'), true);
+        return $this;
+    }
+
+    protected function loader($class)
+    {
+        if ('\\' == $class[0]) {
+            $class = substr($class, 1);
+        }
+
+        $classPosition = strrpos($class, '\\');
+        $className = substr($class, $classPosition + 1);
+        $namespace = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $classPosition));
+
+        /* Class is in the base directory*/
+        if (file_exists($file = $this->getFileName($className, $namespace))) {
+            require_once $file;
+            return;
+        }
+
+        /* Class is in the array $this->namespaces*/
+        foreach ($this->namespaces as $ns => $paths) {
+            if (0 === strcmp($namespace, str_replace('\\', DIRECTORY_SEPARATOR, $ns))) {
+                foreach ($paths as $dir) {
+                    if (file_exists($file = $this->getFileName($className, $namespace, $dir))) {
+                        require_once $file;
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (!class_exists($class, false)
+            && !interface_exists($class, false)
+            && !trait_exists($class, false)) {
+            throw new \ClassNotFoundException($class);
+        }
+    }
+
+    /**
+     * @param $className
+     * @param $namespace
+     * @param null $dir
+     *
+     * @return string
+     */
+    protected function getFileName($className, $namespace, $dir = null)
+    {
+        if (null == $dir) {
+            $dir = $this->baseDir;
+        }
+
+        return $dir . DIRECTORY_SEPARATOR . $namespace . DIRECTORY_SEPARATOR . $className . '.php';
+    }
+
+    /**
+     * @param $dir
+     *
+     * @return Loader
+     */
+    public function setBaseDir($dir)
+    {
+        $this->baseDir = $dir;
+        return $this;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getBaseDir()
+    {
+        return $this->baseDir;
+    }
+}
