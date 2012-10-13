@@ -35,4 +35,9 @@ interface ILoader
      * @return mixed
      */
     public function setBaseDir($dir);
+
+    /**
+     * @return mixed
+     */
+    public function getBaseDir();
 }
