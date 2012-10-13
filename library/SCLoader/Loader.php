@@ -9,7 +9,7 @@ require_once 'ClassNotFoundException.php';
 
 class Loader implements ILoader
 {
-    protected $namespaces;
+    protected $namespaces = array();
 
     protected $baseDir;
 
