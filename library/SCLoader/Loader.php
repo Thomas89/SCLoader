@@ -86,6 +86,7 @@ class Loader implements ILoader
 
     protected function loader($class)
     {
+        /* Separate the absolute path */
         if ('\\' == $class[0]) {
             $class = substr($class, 1);
         }
@@ -94,13 +95,19 @@ class Loader implements ILoader
         $className = substr($class, $classPosition + 1);
         $namespace = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $classPosition));
 
-        /* Class is in the base directory*/
+        /* Class without a namespace */
+        if (file_exists($file = $this->getFileName($class))) {
+            require_once $file;
+            return;
+        }
+
+        /* Class is in the base directory */
         if (file_exists($file = $this->getFileName($className, $namespace))) {
             require_once $file;
             return;
         }
 
-        /* Class is in the array $this->namespaces*/
+        /* Class is in the array $this->namespaces */
         foreach ($this->namespaces as $ns => $paths) {
             if (0 === strcmp($namespace, str_replace('\\', DIRECTORY_SEPARATOR, $ns))) {
                 foreach ($paths as $dir) {
@@ -125,10 +132,14 @@ class Loader implements ILoader
      *
      * @return string
      */
-    protected function getFileName($className, $namespace, $dir = null)
+    protected function getFileName($className, $namespace = null, $dir = null)
     {
         if (null == $dir) {
             $dir = $this->baseDir;
+        }
+
+        if (null == $namespace) {
+            return $dir . $className . (($this->prefix != null) ? '.' . $this->prefix : null) . '.php';
         }
 
         return $dir . DIRECTORY_SEPARATOR . $namespace . DIRECTORY_SEPARATOR . $className
