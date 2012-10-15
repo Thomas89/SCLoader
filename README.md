@@ -1,4 +1,4 @@
-#Description
+#Description [![Build Status](https://secure.travis-ci.org/The-Who/SCLoader.png)](http://travis-ci.org/The-Who/SCLoader)
 SCLoader is a simple classloader for namespaces.
 
 Requires PHP 5.3
