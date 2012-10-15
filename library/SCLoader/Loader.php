@@ -1,8 +1,10 @@
 <?php
-
 /**
- * @namespace
+ * Simple ClassLoader
+ *
+ * @author TheWho <pashaz.exe@gmail.com>
  */
+
 namespace SCLoader;
 
 use SCLoader\ILoader;
