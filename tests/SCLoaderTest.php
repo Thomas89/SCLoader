@@ -6,15 +6,27 @@ use SCLoader\Loader;
 
 class SCLoaderTest extends \PHPUnit_Framework_TestCase
 {
-    protected $loader;
-
-    protected function setUp()
+    public function testNamespaceA()
     {
-        $this->loader = new Loader();
+        $loader = new Loader();
+        $loader->registerNamespace('A', __DIR__ . '/fixtures/NS');
+        $loader->register();
+
+        $this->assertTrue(\A\Foo::$isLoaded);
+        $this->assertTrue(\A\Bar::$isLoaded);
+
+        $loader->unregister();
     }
 
-    public function testBasic()
+    public function testNamespaceB()
     {
-        $this->assertEquals(1, 1);
+        $loader = new Loader();
+        $loader->registerNamespace('B', __DIR__ . '/fixtures/NS');
+        $loader->register();
+
+        $this->assertTrue(\B\Foo::$isLoaded);
+        $this->assertTrue(\B\Bar::$isLoaded);
+
+        $loader->unregister();
     }
 }

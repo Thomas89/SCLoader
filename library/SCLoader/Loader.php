@@ -82,7 +82,7 @@ class Loader implements ILoader
      */
     public function unregister()
     {
-        spl_autoload_unregister(array($this, 'loader'), true);
+        spl_autoload_unregister(array($this, 'loader'));
         return $this;
     }
 
