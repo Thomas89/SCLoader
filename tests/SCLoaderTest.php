@@ -57,4 +57,51 @@ class SCLoaderTest extends \PHPUnit_Framework_TestCase
 
         $loader->unregister();
     }
+
+    public function testRootNamespace()
+    {
+        $loader = new Loader();
+        $loader->setBaseDir(__DIR__ . '/fixtures');
+        $loader->register();
+
+        $this->assertTrue(\RootNS\A\B\Foo::$isLoaded);
+
+        $loader->unregister();
+    }
+
+    public function testSubNamespace()
+    {
+        $loader = new Loader();
+        $loader->registerNamespace('A\B', __DIR__ . '/fixtures/SubNS');
+        $loader->register();
+
+        $this->assertTrue(\A\B\Foo::$isLoaded);
+
+        $loader->unregister();
+    }
+
+    public function testClassPrefix()
+    {
+        $loader = new Loader();
+        $loader->registerNamespace('A', __DIR__ . '/fixtures/ClassPrefix');
+        $loader->setPrefix('class');
+        $loader->register();
+
+        $this->assertTrue(\A\Baz::$isLoaded);
+
+        $loader->unregister();
+    }
+
+    public function testClassesWithoutNamespaces()
+    {
+        $loader = new Loader();
+        $loader->setBaseDir(__DIR__ . '/fixtures/ClassesWithoutNamespaces');
+        $loader->register();
+
+        $this->assertTrue(\Quux::$isLoaded);
+
+        $loader->unregister();
+    }
+
+
 }

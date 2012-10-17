@@ -1,6 +1,8 @@
 <?php
 
-class Bar
+namespace A;
+
+class Baz
 {
     static $isLoaded = true;
 }

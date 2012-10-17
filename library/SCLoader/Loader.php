@@ -141,7 +141,8 @@ class Loader implements ILoader
         }
 
         if (null == $namespace) {
-            return $dir . $className . (($this->prefix != null) ? '.' . $this->prefix : null) . '.php';
+            return $dir . DIRECTORY_SEPARATOR . $className
+                . (($this->prefix != null) ? '.' . $this->prefix : null) . '.php';
         }
 
         return $dir . DIRECTORY_SEPARATOR . $namespace . DIRECTORY_SEPARATOR . $className
