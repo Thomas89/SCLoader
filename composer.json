@@ -1,6 +1,6 @@
 {
-    "name": "The-Who/SCLoader",
-    "type": "library",
+    "name": "the-who/scloader",
+    "type": "classloader",
     "description": "Simple ClassLoader for namespaces",
     "keywords": ["class loader","classloader"],
     "homepage": "https://github.com/The-Who/SCLoader",
