@@ -1,0 +1,19 @@
+{
+    "name": "The-Who/SCLoader",
+    "type": "library",
+    "description": "Simple ClassLoader for namespaces",
+    "keywords": ["class loader","classloader"],
+    "homepage": "https://github.com/The-Who/SCLoader",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TheWho",
+            "email": "pashaz.exe@gmail.com",
+            "homepage": "http://guess-who.by",
+            "role": "PHP Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },    
+}
