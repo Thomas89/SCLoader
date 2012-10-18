@@ -3,6 +3,20 @@ SCLoader is a simple classloader for namespaces.
 
 Requires PHP 5.3
 
+#Install with Composer
+
+Run this in your terminal to get the latest Composer version:
+
+    curl -s https://getcomposer.org/installer | php
+
+Create composer.json
+
+    {
+        "require": {
+            "the-who/scloader": "dev-master"
+        }
+    }
+
 ##Usage
     <?php
         
