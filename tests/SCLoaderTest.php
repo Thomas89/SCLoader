@@ -103,5 +103,15 @@ class SCLoaderTest extends \PHPUnit_Framework_TestCase
         $loader->unregister();
     }
 
+    public function testUnderscoresInNamespaces()
+    {
+        $loader = new Loader();
+        $loader->registerNamespace('A\B', __DIR__ . '/fixtures/Underscores');
+        $loader->register();
 
+        $this->assertTrue(\A\B\Foo_Bar::$isLoaded);
+
+        $loader->unregister();
+    }
 }
+

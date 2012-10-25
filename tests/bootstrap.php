@@ -5,6 +5,7 @@
  * @author TheWho <pashaz.exe@gmail.com>
  */
 
-if (file_exists($loader = __DIR__ . '/../library/SCLoader/Loader.php')) {
+if (file_exists($loader = __DIR__ . '/../lib/vendor/SCLoader/Loader.php')) {
     require_once $loader;
 }
+

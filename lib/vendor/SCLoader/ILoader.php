@@ -53,3 +53,4 @@ interface ILoader
      */
     public function getPrefix();
 }
+

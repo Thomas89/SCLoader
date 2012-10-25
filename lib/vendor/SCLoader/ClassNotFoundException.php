@@ -7,3 +7,4 @@ class ClassNotFoundException extends \Exception
         parent::__construct("Class '$class' not found.");
     }
 }
+
