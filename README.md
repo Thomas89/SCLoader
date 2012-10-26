@@ -23,14 +23,14 @@ Create composer.json
     use Session\Factory;
     use SCLoader\Loader;
 
-    require_once 'library/SCLoader/Loader.php';
+    require_once 'lib/vendor/SCLoader/Loader.php';
 
     $loader = new Loader();
-    $loader->registerNamespace('Session', __DIR__ . '/library')
+    $loader->registerNamespace('Session', __DIR__ . '/lib/vendor')
 
     $loader->register();
     
-    /* included class 'library/Session/Factory.php' */
+    /* included class 'lib/vendor/Session/Factory.php' */
     $cache = new Factory();
 
 #Methods
@@ -48,8 +48,8 @@ Registers a namespace.
 Register namespaces in an array:
 
     $loader->registerNamespaces(array(
-        'Session' => array(__DIR__ . '/library'),
-        'Symfony' => array(__DIR__ . '/library/Symfony/lib'),
+        'Session' => array(__DIR__ . '/lib/vendor'),
+        'Symfony' => array(__DIR__ . '/lib/vendor/Symfony/lib'),
     ));
 
 ##setBaseDir($dir)
