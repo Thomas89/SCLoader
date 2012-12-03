@@ -41,7 +41,7 @@ class Loader implements ILoader
     public function __construct()
     {
         if (null == $this->baseDir) {
-            $this->baseDir = __DIR__;
+            $this->baseDir = __DIR__ . '/../';
         }
     }
 

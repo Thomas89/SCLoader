@@ -30,13 +30,17 @@ Create composer.json
     require_once 'vendor/SCLoader/Loader.php';
 
     $loader = new Loader();
-    $loader->registerNamespace('Session', __DIR__ . '/vendor')
+    $loader->registerNamespace('Session', __DIR__ . '/vendor');
 
     $loader->register();
     
     /* included class 'vendor/Session/Factory.php' */
     $cache = new Factory();
 
+##Symfony 2 Components   
+
+    $loader->registerNamespace('Symfony\Component\Validator', __DIR__ . '/vendor'); 
+    
 #Methods
 
 ##register()
