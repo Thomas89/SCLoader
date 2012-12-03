@@ -17,20 +17,24 @@ Create composer.json
         }
     }
 
+#Install with Git
+
+    git clone https://github.com/The-Who/SCLoader.git
+
 ##Usage
     <?php
         
     use Session\Factory;
     use SCLoader\Loader;
 
-    require_once 'lib/vendor/SCLoader/Loader.php';
+    require_once 'SCLoader/Loader.php';
 
     $loader = new Loader();
-    $loader->registerNamespace('Session', __DIR__ . '/lib/vendor')
+    $loader->registerNamespace('Session', __DIR__ . '/vendor')
 
     $loader->register();
     
-    /* included class 'lib/vendor/Session/Factory.php' */
+    /* included class 'vendor/Session/Factory.php' */
     $cache = new Factory();
 
 #Methods
@@ -48,8 +52,8 @@ Registers a namespace.
 Register namespaces in an array:
 
     $loader->registerNamespaces(array(
-        'Session' => array(__DIR__ . '/lib/vendor'),
-        'Symfony' => array(__DIR__ . '/lib/vendor/Symfony/lib'),
+        'Session' => array(__DIR__ . '/vendor'),
+        'Symfony' => array(__DIR__ . '/vendor/Symfony/lib'),
     ));
 
 ##setBaseDir($dir)
