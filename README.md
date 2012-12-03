@@ -27,7 +27,7 @@ Create composer.json
     use Session\Factory;
     use SCLoader\Loader;
 
-    require_once 'SCLoader/Loader.php';
+    require_once 'vendor/SCLoader/Loader.php';
 
     $loader = new Loader();
     $loader->registerNamespace('Session', __DIR__ . '/vendor')
