@@ -93,15 +93,15 @@ class Loader implements ILoader
             $class = substr($class, 1);
         }
 
-        $classPosition = strrpos($class, '\\');
-        $className = substr($class, $classPosition + 1);
-        $namespace = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $classPosition));
-
         /* Class without a namespace */
         if (file_exists($file = $this->getFile($class))) {
             require_once $file;
             return;
         }
+
+        $classPosition = strrpos($class, '\\');
+        $className = substr($class, $classPosition + 1);
+        $namespace = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 0, $classPosition));
 
         /* Class is in the base directory */
         if (file_exists($file = $this->getFile($className, $namespace))) {
