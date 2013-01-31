@@ -111,12 +111,11 @@ class Loader implements ILoader
 
         /* Class is in the array $this->namespaces */
         foreach ($this->namespaces as $ns => $paths) {
-            if (0 === strcmp($namespace, str_replace('\\', DIRECTORY_SEPARATOR, $ns))) {
-                foreach ($paths as $dir) {
-                    if (file_exists($file = $this->getFile($className, $namespace, $dir))) {
-                        require_once $file;
-                        return;
-                    }
+            str_replace('\\', DIRECTORY_SEPARATOR, $ns);
+            foreach ($paths as $dir) {
+                if (file_exists($file = $this->getFile($className, $namespace, $dir))) {
+                    require_once $file;
+                    return;
                 }
             }
         }
